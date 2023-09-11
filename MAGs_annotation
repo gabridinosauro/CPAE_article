@@ -47,3 +47,9 @@ for file in *.f*; do
 
 done
 ```
+move them to a new folder
+
+```
+cd /xdisk/pkiela/schiro/CPAE/bins/prodigal
+```
+
