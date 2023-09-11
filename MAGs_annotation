@@ -51,5 +51,8 @@ move them to a new folder
 
 ```
 cd /xdisk/pkiela/schiro/CPAE/bins/prodigal
+mkdir amino 
+mv *pro* amino
+
 ```
 
