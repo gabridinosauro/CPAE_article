@@ -125,5 +125,6 @@ for (file_path in file_paths)
 gene_count_df[is.na(gene_count_df)] = 0
 gene_count_df = column_to_rownames(gene_count_df, var="Gene")
 colnames(gene_count_df) <- gsub("_.*", "", colnames(gene_count_df))
+saveRDS(gene_count_df, "KO_counts.RDS")
 ```
 
