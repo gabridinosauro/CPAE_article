@@ -39,4 +39,25 @@ for file in *_clean_1.fastq; do
 done
 
 ```
+now I create a table with them, in R.
+```
+### Quantification Bins_cover_M
+setwd("/Users/gabri/Library/CloudStorage/Box-Box/CPAE_manuscript/new_analyses/quantification_bins/")
+file_list = as.list(list.files())
+
+abundance = data.frame(matrix(nrow = 159, ncol = 0))
+for (files in file_list)
+{
+  temp = read.delim(files,row.names = 1)
+  abundance = cbind(abundance, temp)
+  stopifnot(rownames(abundance) == rownames(temp))
+}
+
+saveRDS(abundance,"coverm_rel_ab.RDS")
+
+
+
+```
+
+
 
