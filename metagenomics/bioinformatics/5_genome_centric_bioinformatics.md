@@ -80,7 +80,7 @@ done
 
 ```
 
-to create then a KO table we run this script
+to create then a KO table we run this script in R
 
 
 ```
