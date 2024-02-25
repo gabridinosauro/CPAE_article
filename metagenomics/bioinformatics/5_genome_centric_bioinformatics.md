@@ -80,8 +80,37 @@ done
 
 ```
 
+to create then a KO table we run this script
 
 
+```
+### Read genome KO annotations in
+setwd("/Users/gabri/Library/CloudStorage/Box-Box/CPAE_manuscript/new_analyses/annotations_genomes/")
+list_of_files = list.files()
+library(dplyr)
+file_paths= as.list(list_of_files)
+gene_count_df <- data.frame(Gene = character(0), stringsAsFactors = FALSE)
+
+for (file_path in file_paths)
+  {
+    # Read the gene list from the file, assuming a two-column format
+    gene_list <- read.delim(file_path, header = FALSE, stringsAsFactors = FALSE, col.names = c("ORF", "Gene"))
+    # Keep only the gene names from the left column
+    gene_names <- gene_list$Gene
+    # Create a dataframe with gene names and counts
+    gene_counts <- data.frame(Gene = gene_names, count = 1)
+    gene_counts = gene_counts[!gene_counts$Gene =="",]
+    gene_counts = aggregate(count~Gene, gene_counts, FUN = sum)
+    # Count gene occurrences and store them in a column named after the file
+    gene_count_df <- merge(gene_count_df,gene_counts, by = "Gene", all = TRUE) 
+    colnames(gene_count_df)[ncol(gene_count_df)] <- basename(file_path)
+}
+
+gene_count_df[is.na(gene_count_df)] = 0
+gene_count_df = column_to_rownames(gene_count_df, var="Gene")
+colnames(gene_count_df) <- gsub("_.*", "", colnames(gene_count_df))
+saveRDS(gene_count_df, "KO_counts.RDS")
+```
 
 
 
